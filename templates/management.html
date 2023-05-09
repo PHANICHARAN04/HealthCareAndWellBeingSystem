@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Details Directory</title>
+<style>
+    body {
+        background-color: #f7f7f7;
+        font-family: Arial, sans-serif;
+    }
+
+    h5 {
+        font-weight: bold;
+        color: #00695c;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #00695c;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .card {
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+
+    .col-md-5 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 0 10px;
+    }
+
+    hr {
+        border-top: 1px solid #ddd;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+</style>
+</head>
+<body>
+<!-- Add an input field for the user to enter search term -->
+<input type="text" id="searchInput">
+
+<!-- Add a button to trigger the search -->
+<button onclick="search()">Search</button>
+
+<!-- Add a div to display the search results -->
+<div id="searchResults"></div>
+
+<script>
+function search() {
+  // Get the search term entered by the user
+  var searchTerm = document.getElementById("searchInput").value;
+
+  // Find all instances of the search term on the page
+  var searchResults = document.querySelectorAll("body *:not(script):not(style):not(meta):not(title):not(head):not(html)[data-searchable]");
+  
+  // Clear any previous search results
+  var searchResultsDiv = document.getElementById("searchResults");
+  searchResultsDiv.innerHTML = "";
+  
+  // Loop through the search results and highlight the search term
+  for (var i = 0; i < searchResults.length; i++) {
+    var searchResult = searchResults[i];
+    var html = searchResult.innerHTML;
+    var regex = new RegExp(searchTerm, "gi");
+    var highlightedHtml = html.replace(regex, "<mark>$&</mark>");
+    searchResult.innerHTML = highlightedHtml;
+    searchResultsDiv.appendChild(searchResult);
+  }
+}
+</script>
+{% for group in request.user.groups.all %}
+{% if group.name == 'admin' %}
+
+
+<br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>cardiology</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>email</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in cardiology  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+<br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>pediatrics</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>email</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in pediatrics  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+    
+
+
+    
+<br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>gastroenterology</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>email</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in gastroenterology  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+    <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>psychology</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>email</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in psychology  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+      <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>dermatology</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>email</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in dermatology  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+        <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>bloodTest</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>age</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in bloodTest  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+        <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>ctScan</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>age</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in ctScan  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+        <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h5>urineTest</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>age</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in urineTest  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+    <br>
+    <div class="row m-0">
+        <div class="col-md-5">
+            <h5>ultraSound</h5>
+            <hr>
+            <div class="card card-body">
+                <table class="table table-sm" border="2">
+                    <tr>                    <th>name</th>
+                        <th>Phone</th>
+                        <th>age</th>
+                        <th>desc</th>
+                    </tr>
+                    {% for i in ultraSound  %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td>{{i.phone}}</td>
+                        <td>{{i.age}}</td>
+                        <td>{{i.desc}}</td>
+                    </tr>
+    
+                    {% endfor %}
+    
+                </table>
+            </div>
+        </div>
+    
+        <br> 
+                    <tr>
+                     
+                     
+                        <td>{{i.user}}</td>
+                        <td>{{i.phone}}</td>
+                    </tr>
+                    
+    
+                </table>
+            </div>
+    </div>
+    
+        <br>
+{% endif %}
+{% endfor %}
+</body>
+</html>
