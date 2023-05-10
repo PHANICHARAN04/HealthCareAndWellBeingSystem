@@ -64,42 +64,13 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    
+    .highlight {
+        background-color: yellow;
+      }
 </style>
 </head>
 <body>
-<!-- Add an input field for the user to enter search term -->
-<input type="text" id="searchInput">
-
-<!-- Add a button to trigger the search -->
-<button onclick="search()">Search</button>
-
-<!-- Add a div to display the search results -->
-<div id="searchResults"></div>
-
-<script>
-function search() {
-  // Get the search term entered by the user
-  var searchTerm = document.getElementById("searchInput").value;
-
-  // Find all instances of the search term on the page
-  var searchResults = document.querySelectorAll("body *:not(script):not(style):not(meta):not(title):not(head):not(html)[data-searchable]");
-  
-  // Clear any previous search results
-  var searchResultsDiv = document.getElementById("searchResults");
-  searchResultsDiv.innerHTML = "";
-  
-  // Loop through the search results and highlight the search term
-  for (var i = 0; i < searchResults.length; i++) {
-    var searchResult = searchResults[i];
-    var html = searchResult.innerHTML;
-    var regex = new RegExp(searchTerm, "gi");
-    var highlightedHtml = html.replace(regex, "<mark>$&</mark>");
-    searchResult.innerHTML = highlightedHtml;
-    searchResultsDiv.appendChild(searchResult);
-  }
-}
-</script>
+    Search Here: <input type="text" id="search-input" placeholder="Search">
 {% for group in request.user.groups.all %}
 {% if group.name == 'admin' %}
 
@@ -107,7 +78,7 @@ function search() {
 <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>cardiology</h5>
+        <h4><font color="blue">Cardiology</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -151,7 +122,7 @@ function search() {
 <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>pediatrics</h5>
+        <h4><font color="blue">Pediatrics</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -198,7 +169,7 @@ function search() {
 <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>gastroenterology</h5>
+        <h4><font color="blue">Gastroenterology</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -244,7 +215,7 @@ function search() {
     <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>psychology</h5>
+        <h4><font color="blue">Psychology</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -296,7 +267,7 @@ function search() {
       <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>dermatology</h5>
+        <h4><font color="blue">Dermatology</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -344,7 +315,7 @@ function search() {
         <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>bloodTest</h5>
+        <h4><font color="green">BloodTest</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -392,7 +363,55 @@ function search() {
         <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>ctScan</h5>
+        <h4><font color="green">BloodTest</font></h4>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm" border="2">
+                <tr>                    <th>name</th>
+                    <th>Phone</th>
+                    <th>age</th>
+                    <th>desc</th>
+                </tr>
+                {% for i in bloodTest  %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.age}}</td>
+                    <td>{{i.desc}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <br> 
+                <tr>
+                 
+                 
+                    <td>{{i.user}}</td>
+                    <td>{{i.phone}}</td>
+                </tr>
+                
+
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+
+
+
+
+
+
+
+        <br>
+<div class="row m-0">
+    <div class="col-md-5">
+        <h4><font color="green">CTScan</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -443,7 +462,7 @@ function search() {
         <br>
 <div class="row m-0">
     <div class="col-md-5">
-        <h5>urineTest</h5>
+        <h4><font color="green">UrineTest</font></h4>
         <hr>
         <div class="card card-body">
             <table class="table table-sm" border="2">
@@ -488,7 +507,7 @@ function search() {
     <br>
     <div class="row m-0">
         <div class="col-md-5">
-            <h5>ultraSound</h5>
+            <h4><font color="green">UltraSound</font></h4>
             <hr>
             <div class="card card-body">
                 <table class="table table-sm" border="2">
@@ -525,6 +544,44 @@ function search() {
     </div>
     
         <br>
+        <script>
+            const searchInput = document.querySelector('#search-input');
+            const tableRows = document.querySelectorAll('table tr');
+            let previouslyHighlightedCells = [];
+        
+            searchInput.addEventListener('input', () => {
+              // Remove highlight from all previously highlighted cells
+              previouslyHighlightedCells.forEach(cell => cell.classList.remove('highlight'));
+              previouslyHighlightedCells = [];
+        
+              const searchTerm = searchInput.value.toLowerCase();
+              if (searchTerm.trim() !== '') {
+                // Loop through all the rows in the table
+                tableRows.forEach(row => {
+                  const cells = row.querySelectorAll('td');
+                  let found = false;
+                  // Loop through all the cells in the row
+                  cells.forEach(cell => {
+                    if (cell.innerHTML.toLowerCase().includes(searchTerm)) {
+                      // Highlight the cell and set found to true
+                      cell.classList.add('highlight');
+                      previouslyHighlightedCells.push(cell);
+                      found = true;
+                    }
+                  });
+                  // If the search term was found in any of the cells in the row, display the row, otherwise hide it
+                  if (found) {
+                    row.style.display = '';
+                  } else {
+                    row.style.display = 'none';
+                  }
+                });
+              } else {
+                // Reset the table to its default state if search input is empty
+                tableRows.forEach(row => row.style.display = '');
+              }
+            });
+          </script>
 {% endif %}
 {% endfor %}
 </body>

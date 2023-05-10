@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from pymongo import MongoClient
+
 client=MongoClient("mongodb://localhost:27017")
 ap=client['Appointments']
 cardiology=ap.Detail
@@ -302,10 +303,11 @@ def management(request):
     kemotheraphy=Kemotheraphy.objects.all()
     xRay=XRay.objects.all()
     urineTest=UrineTest.objects.all()
+    endoscopy=Endoscopy.objects.all()
     ultraSound=UltraSound.objects.all()
     pulmonaryFuctionTest=PulmonaryFuctionTest.objects.all()
     
     context={"cardiology":cardiology,"pediatrics":pediatrics,"gastroenterology": gastroenterology,"psychology":psychology,"dermatology":dermatology
          , "bloodTest":bloodTest,"ctScan":ctScan, " kemotheraphy": kemotheraphy,"xRay":xRay, "urineTest":urineTest,"ultraSound":ultraSound,
-         "pulmonaryFuctionTest":pulmonaryFuctionTest  }
+         "pulmonaryFuctionTest":pulmonaryFuctionTest,"endoscopy":Endoscopy  }
     return render(request,"management.html",context)

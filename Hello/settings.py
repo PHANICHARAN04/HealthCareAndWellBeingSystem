@@ -132,3 +132,4 @@ STATICFILES_DIRS = [
 ]
 #http://source.unsplash.com/1600x600/?river,water
 
+
